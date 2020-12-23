@@ -124,7 +124,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(typescript-mode dracula-theme indium diminish company-lsp deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer all-the-icons dumb-jump dotenv-mode company-web expand-region dired-sidebar yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy logview company web-mode anzu magit php-mode dtrt-indent rainbow-mode json-mode)))
+   '(typescript-mode dracula-theme indium diminish company-lsp deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer all-the-icons dumb-jump dotenv-mode company-web expand-region dired-sidebar yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode dtrt-indent rainbow-mode json-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
