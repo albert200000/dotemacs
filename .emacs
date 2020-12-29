@@ -124,14 +124,14 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(typescript-mode dracula-theme indium diminish company-lsp deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer all-the-icons dumb-jump dotenv-mode company-web expand-region dired-sidebar yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode dtrt-indent rainbow-mode json-mode)))
+   '(typescript-mode dracula-theme indium diminish company-lsp deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer all-the-icons dumb-jump dotenv-mode company-web expand-region dired-sidebar yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:height 110 :family "Hack")))))
+ '(default ((t (:height 120 :family "Hack")))))
 
 (if (eq system-type 'darwin)
     (custom-set-faces
@@ -146,8 +146,11 @@
 
 (load-theme 'dracula t)
 
-;; Tell emacs where is your personal elisp lib dir
-(add-to-list 'load-path "~/.emacs.d/lisp")
+;; Custom lisp
+(load "~/.emacs.d/lisp/flymake-pug")
+
+(load "~/.emacs.d/lisp/guess-style")
+(add-hook 'prog-mode-hook 'guess-style-guess-all)
 
 (require 'icomplete)
 (setq completion-ignore-case t)
@@ -193,9 +196,6 @@
 
 (require 'yasnippet)
 (yas-global-mode 1)
-
-(require 'dtrt-indent)
-(dtrt-indent-global-mode t)
 
 (require 'dumb-jump)
 (dumb-jump-mode t)
@@ -304,7 +304,6 @@
 (require 'diminish)
 (diminish 'eldoc-mode)
 (diminish 'flymake-mode)
-(diminish 'dtrt-indent-mode)
 (diminish 'anzu-mode)
 (diminish 'company-mode)
 (diminish 'subword-mode)
@@ -327,20 +326,6 @@
            (and (not current-prefix-arg))
            (let ((mark-even-if-inactive transient-mark-mode))
              (indent-region (region-beginning) (region-end) nil)))))
-
-(dir-locals-set-class-variables 'unwritable-directory
-                                '((nil . ((web-mode-markup-indent-offset . 2)
-                                          (web-mode-code-indent-offset . 2)
-                                          (web-mode-attr-indent-offset . 2)))))
-
-(dir-locals-set-directory-class
- "~/Projects/slot-web/" 'unwritable-directory)
-(dir-locals-set-directory-class
- "~/Projects/slot-host/" 'unwritable-directory)
-(dir-locals-set-directory-class
- "~/Projects/slot-node/" 'unwritable-directory)
-(dir-locals-set-directory-class
- "~/Projects/slot-streaming-node/" 'unwritable-directory)
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
