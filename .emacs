@@ -204,14 +204,18 @@
 
 (require 'flymake)
 (setq flymake-no-changes-timeout 0.2)
-(flymake-mode t)
 (flyspell-mode 0)
+
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (flymake-mode t)))
 
 (require 'lsp-mode)
 (setq lsp-enable-snippet nil)
 (setq lsp-eldoc-render-all t)
 (setq lsp-diagnostics-provider :flymake)
 (setq lsp-modeline-diagnostics-enable t)
+(setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-enable-file-watchers nil)
 (setq lsp-file-watch-ignored '("vendor" "node-modules"))
 (setq lsp-log-io nil)
@@ -262,6 +266,7 @@
 (setq pug-tab-width 2)
 
 (add-hook 'pug-mode-hook (lambda ()
+                           (flymake-pug-turn-on)
                            (setQuoteElectricPair)
                            (set (make-local-variable 'company-backends) '(company-web-jade company-dabbrev))
                            (company-mode t)))
