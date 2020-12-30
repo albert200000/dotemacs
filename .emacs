@@ -52,7 +52,10 @@
 ;; normal shortcuts
 (cua-mode t)
 (setq-default cursor-type 'bar)
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'prog-mode-hook (lambda ()
+                            (display-line-numbers-mode)
+                            (hs-minor-mode)
+                          ))
 (column-number-mode t)
 (scroll-bar-mode t)
 (tool-bar-mode -1)
@@ -317,6 +320,7 @@
 (diminish 'yas-minor-mode)
 (diminish 'lsp-mode)
 (diminish 'abbrev-mode)
+(diminish 'hs-minor-mode)
 
 (setq frame-title-format
       '(buffer-file-name "%f" ; File buffer
