@@ -220,6 +220,7 @@
 (setq lsp-file-watch-ignored '("vendor" "node-modules"))
 (setq lsp-log-io nil)
 (setq lsp-enable-symbol-highlighting nil)
+(setenv "TSSERVER_LOG_FILE" "/tmp/tsserver.log")
 
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.y?ml\\..*\\'" . yaml-mode))
