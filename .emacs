@@ -339,15 +339,9 @@
            (let ((mark-even-if-inactive transient-mark-mode))
              (indent-region (region-beginning) (region-end) nil)))))
 
-(defun my-switch-to-buffer ()
-  (interactive)
-  (let ((completion-regexp-list '("\\`[^*]"
-                                  "\\`\\([^T]\\|T\\($\\|[^A]\\|A\\($\\|[^G]\\|G\\($\\|[^S]\\|S.\\)\\)\\)\\).*")))
-    (call-interactively 'switch-to-buffer)))
-
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-x b") 'my-switch-to-buffer)
+(global-set-key (kbd "C-x b") 'switch-to-buffer)
 (global-set-key (kbd "C-c s") 'imenu)
 (global-set-key (kbd "C-S-s") 'deadgrep)
 (global-set-key (kbd "C-c f") 'project-find-file)
