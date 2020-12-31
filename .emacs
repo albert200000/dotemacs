@@ -127,7 +127,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(typescript-mode dracula-theme indium diminish company-lsp deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer all-the-icons dumb-jump dotenv-mode company-web expand-region dired-sidebar yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
+   '(flymake-eslint typescript-mode dracula-theme indium diminish company-lsp deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer all-the-icons dumb-jump dotenv-mode company-web expand-region dired-sidebar yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -217,7 +217,8 @@
 (setq lsp-enable-snippet nil)
 (setq lsp-eldoc-render-all t)
 (setq lsp-diagnostics-provider :flymake)
-(setq lsp-modeline-diagnostics-enable t)
+(setq lsp-modeline-diagnostics-enable nil)
+(setq lsp-diagnostics-disabled-modes '(web-mode js-mode))
 (setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-enable-file-watchers nil)
 (setq lsp-file-watch-ignored '("vendor" "node-modules"))
@@ -258,14 +259,9 @@
 
 (add-hook 'js-mode-hook (lambda ()
                           (lsp-deferred)
+                          (flymake-eslint-enable)
                           (setQuoteElectricPair)
                           ))
-
-(add-hook 'web-mode-hook (lambda ()
-                           (lsp-deferred)
-                           (when (string-equal "twig" (file-name-extension buffer-file-name))
-                             (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev))
-                             (company-mode t))))
 
 (require 'pug-mode)
 (setq pug-tab-width 2)
@@ -286,15 +282,20 @@
 
 (add-hook 'web-mode-hook
           (lambda ()
-            (if (string-equal "js" (file-name-extension buffer-file-name))
+            (when (string-equal "js" (file-name-extension buffer-file-name))
+              (flymake-eslint-enable)
               (require 'indium)
               (indium-interaction-mode +1))
             (when (or
                    (string-equal "js" (file-name-extension buffer-file-name))
                    (string-equal "tsx" (file-name-extension buffer-file-name))
                    )
+              (lsp-deferred)
               (setQuoteElectricPair)
-              )))
+              )
+            (when (string-equal "twig" (file-name-extension buffer-file-name))
+              (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev))
+              (company-mode t))))
 
 (add-to-list 'magic-mode-alist '("^import React" . web-mode))
 (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
