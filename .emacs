@@ -127,7 +127,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(flymake-eslint typescript-mode dracula-theme indium diminish company-lsp deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer all-the-icons dumb-jump dotenv-mode company-web expand-region dired-sidebar yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
+   '(flymake-eslint typescript-mode dracula-theme indium diminish company-lsp deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer all-the-icons dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -304,9 +304,6 @@
 
 (require 'all-the-icons)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-(require 'dired-sidebar)
-(setq dired-sidebar-theme 'all-the-icons)
-(setq dired-sidebar-use-custom-font t)
 
 (all-the-icons-ibuffer-mode 1)
 
@@ -350,7 +347,7 @@
 (global-set-key (kbd "C-x ,") 'dumb-jump-back)
 (global-set-key (kbd "C-z")   'undo-fu-only-undo)
 (global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
-(global-set-key (kbd "C-\\") 'dired-sidebar-toggle-sidebar)
+(global-set-key (kbd "C-\\") 'speedbar)
 (global-set-key (kbd "M-[") 'sp-unwrap-sexp)
 
 ;; Unboldify fonts
