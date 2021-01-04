@@ -129,17 +129,10 @@
  '(package-selected-packages
    '(flymake-eslint typescript-mode dracula-theme indium diminish company-lsp deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer all-the-icons dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:height 120 :family "Hack")))))
+(set-frame-font "Hack:pixelsize=16")
 
 (if (eq system-type 'darwin)
-    (custom-set-faces
-     '(default ((t (:height 150 :family "Hack")))))
-  )
+    (set-frame-font "Hack:pixelsize=18"))
 
 ;; Auto install packages
 (package-initialize)
