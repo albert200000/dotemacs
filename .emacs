@@ -283,9 +283,7 @@
 (add-hook 'web-mode-hook
           (lambda ()
             (when (string-equal "js" (file-name-extension buffer-file-name))
-              (flymake-eslint-enable)
-              (require 'indium)
-              (indium-interaction-mode +1))
+              (flymake-eslint-enable))
             (when (or
                    (string-equal "js" (file-name-extension buffer-file-name))
                    (string-equal "tsx" (file-name-extension buffer-file-name))
