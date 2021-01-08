@@ -1,3 +1,9 @@
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -127,7 +133,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish deadgrep flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
+   '(helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -148,14 +154,8 @@
 (load "~/.emacs.d/lisp/guess-style")
 (add-hook 'prog-mode-hook 'guess-style-guess-all)
 
-(require 'icomplete)
-(setq completion-ignore-case t)
-(setq icomplete-hide-common-prefix nil)
-(setq icomplete-show-matches-on-no-input t)
-(setq icomplete-max-delay-chars 0)
-(setq icomplete-compute-delay 0)
-(icomplete-mode t)
-(fido-mode t)
+(setq helm-boring-buffer-regexp-list (list (rx "*") (rx "magit") (rx " markdown")))
+(helm-mode 1)
 
 (require 'paren)
 (set-face-attribute 'show-paren-match nil :foreground "yellow")
@@ -312,6 +312,7 @@
 (diminish 'hs-minor-mode)
 (diminish 'all-the-icons-dired-mode)
 (diminish 'all-the-icons-ibuffer-mode)
+(diminish 'helm-mode)
 
 (setq frame-title-format
       '(buffer-file-name "%f" ; File buffer
@@ -331,9 +332,12 @@
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-x b") 'switch-to-buffer)
-(global-set-key (kbd "C-c s") 'imenu)
-(global-set-key (kbd "C-S-s") 'deadgrep)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c s") 'helm-imenu)
+(global-set-key (kbd "M-x") #'helm-M-x)
+(global-set-key (kbd "C-S-s") 'helm-do-grep-ag)
+(global-set-key (kbd "C-c o") 'helm-occur)
 (global-set-key (kbd "C-c f") 'project-find-file)
 (global-set-key (kbd "S-<return>") 'avy-goto-word-1)
 (global-set-key (kbd "C-x .") 'dumb-jump-go)
@@ -351,9 +355,3 @@
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
