@@ -61,6 +61,7 @@
 (add-hook 'prog-mode-hook (lambda ()
                             (display-line-numbers-mode)
                             (hs-minor-mode)
+                            (diminish 'hs-minor-mode)
                           ))
 (column-number-mode t)
 (scroll-bar-mode t)
@@ -129,7 +130,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(deadgrep helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
+   '(helm-ag helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -306,7 +307,6 @@
 (diminish 'yas-minor-mode)
 (diminish 'lsp-mode)
 (diminish 'abbrev-mode)
-(diminish 'hs-minor-mode)
 (diminish 'all-the-icons-dired-mode)
 (diminish 'all-the-icons-ibuffer-mode)
 (diminish 'helm-mode)
@@ -333,7 +333,7 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c s") 'helm-imenu)
 (global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-S-s") 'deadgrep)
+(global-set-key (kbd "C-S-s") 'helm-ag-project-root)
 (global-set-key (kbd "C-c o") 'helm-occur)
 (global-set-key (kbd "C-c f") 'project-find-file)
 (global-set-key (kbd "S-<return>") 'avy-goto-word-1)
