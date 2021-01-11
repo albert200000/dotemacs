@@ -121,10 +121,6 @@
       (kill-buffer "*scratch*")))
 (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
-;; Omit buffers starting with * when switching with C-x arrow
-(set-frame-parameter (selected-frame) 'buffer-predicate
-                     (lambda (buf) (not (string-match-p "^*" (buffer-name buf)))))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -133,12 +129,12 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
+   '(deadgrep helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu magit php-mode rainbow-mode json-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
 (if (eq system-type 'darwin)
-    (set-frame-font "Hack:pixelsize=18"))
+    (set-frame-font "Hack:pixelsize=16"))
 
 ;; Auto install packages
 (package-initialize)
@@ -155,6 +151,7 @@
 (add-hook 'prog-mode-hook 'guess-style-guess-all)
 
 (setq helm-boring-buffer-regexp-list (list (rx "*") (rx "magit") (rx " markdown")))
+(setq helm-split-window-inside-p t)
 (helm-mode 1)
 
 (require 'paren)
@@ -336,7 +333,7 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c s") 'helm-imenu)
 (global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-S-s") 'helm-do-grep-ag)
+(global-set-key (kbd "C-S-s") 'deadgrep)
 (global-set-key (kbd "C-c o") 'helm-occur)
 (global-set-key (kbd "C-c f") 'project-find-file)
 (global-set-key (kbd "S-<return>") 'avy-goto-word-1)
