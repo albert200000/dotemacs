@@ -45,6 +45,7 @@
 (setq scroll-step 1) ;; keyboard scroll lines at a time
 (setq fast-but-imprecise-scrolling t)
 (setq scroll-preserve-screen-position 'always)
+(setq scroll-conservatively 101)
 (setq auto-window-vscroll nil)
 (setq scroll-margin 3)
 (setq text-scale-mode-step '1.05)
