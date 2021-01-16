@@ -299,6 +299,8 @@
 
 (global-hl-todo-mode t)
 
+(setq org-support-shift-select t)
+
 (require 'diminish)
 (diminish 'eldoc-mode)
 (diminish 'flymake-mode)
