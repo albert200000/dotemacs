@@ -131,7 +131,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(geben helm-ag helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode json-mode)))
+   '(geben helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode json-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -247,7 +247,7 @@
 (setq web-mode-attr-indent-offset 4)
 (add-to-list 'auto-mode-alist '("\\.min.js\\'" . text-mode))
 (setq js-switch-indent-offset 2)
-(add-to-list 'interpreter-mode-alist '("node" . web-mode))
+(add-to-list 'interpreter-mode-alist '("node" . js-mode))
 
 (add-hook 'js-mode-hook (lambda ()
                           (lsp-deferred)
@@ -336,7 +336,7 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c s") 'helm-imenu)
 (global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-S-s") 'helm-ag-project-root)
+(global-set-key (kbd "C-S-s") 'helm-grep-do-git-grep)
 (global-set-key (kbd "C-c o") 'helm-occur)
 (global-set-key (kbd "C-c f") 'project-find-file)
 (global-set-key (kbd "S-<return>") 'avy-goto-word-1)
