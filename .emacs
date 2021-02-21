@@ -154,6 +154,8 @@
 
 (setq helm-boring-buffer-regexp-list (list (rx "*") (rx " markdown")))
 (setq helm-split-window-inside-p t)
+(setq helm-move-to-line-cycle-in-source t)
+(setq helm-allow-mouse t)
 (helm-mode 1)
 
 (require 'paren)
