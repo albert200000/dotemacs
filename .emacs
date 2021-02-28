@@ -131,7 +131,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(geben helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode json-mode)))
+   '(move-text block-nav geben helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode json-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -348,6 +348,12 @@
 (global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
 (global-set-key (kbd "C-\\") 'speedbar)
 (global-set-key (kbd "M-[") 'sp-unwrap-sexp)
+(global-set-key (kbd "C-<down>") 'block-nav-next-block)
+(global-set-key (kbd "C-<up>") 'block-nav-previous-block)
+(global-set-key (kbd "C-S-<down>") 'block-nav-next-indentation-level)
+(global-set-key (kbd "C-S-<up>") 'block-nav-previous-indentation-level)
+(global-set-key (kbd "M-S-<down>") 'move-text-down)
+(global-set-key (kbd "M-S-<up>") 'move-text-up)
 
 ;; Unboldify fonts
 (set-face-attribute 'font-lock-type-face nil :weight 'normal)
