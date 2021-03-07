@@ -131,7 +131,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(move-text block-nav geben helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode json-mode)))
+   '(move-text block-nav geben helm lsp-mode flymake-eslint typescript-mode dracula-theme indium diminish flimenu coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -212,7 +212,7 @@
 (setq lsp-eldoc-render-all t)
 (setq lsp-diagnostics-provider :flymake)
 (setq lsp-modeline-diagnostics-enable nil)
-(setq lsp-diagnostics-disabled-modes '(web-mode js-mode))
+(setq lsp-diagnostics-disabled-modes '(web-mode))
 (setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-enable-file-watchers nil)
 (setq lsp-file-watch-ignored '("vendor" "node-modules"))
@@ -224,10 +224,6 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.y?ml\\..*\\'" . yaml-mode))
 (add-hook 'yaml-mode-hook 'lsp-deferred)
-
-(require 'json-mode)
-(add-to-list 'auto-mode-alist '("\\.json\\..*\\'" . json-mode))
-(add-hook 'json-mode-hook 'lsp-deferred)
 
 (add-hook 'css-mode-hook 'lsp-deferred)
 (add-hook 'scss-mode-hook 'lsp-deferred)
@@ -252,8 +248,10 @@
 (add-to-list 'interpreter-mode-alist '("node" . js-mode))
 
 (add-hook 'js-mode-hook (lambda ()
-                          (lsp-deferred)
-                          (flymake-eslint-enable)
+                          (when (string-equal "json" (file-name-extension buffer-file-name))
+                            (lsp-deferred))
+                          (when (string-equal "js" (file-name-extension buffer-file-name))
+                            (flymake-eslint-enable))
                           (setQuoteElectricPair)
                           ))
 
