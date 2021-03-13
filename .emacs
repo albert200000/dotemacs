@@ -63,7 +63,7 @@
                             (display-line-numbers-mode)
                             (hs-minor-mode)
                             (diminish 'hs-minor-mode)
-                          ))
+                            ))
 (column-number-mode t)
 (scroll-bar-mode t)
 (tool-bar-mode -1)
@@ -113,15 +113,6 @@
              (let ((buffer "*Completions*"))
                (and (get-buffer buffer)
                     (kill-buffer buffer)))))
-
-;; Makes *scratch* empty.
-(setq initial-scratch-message "")
-
-;; Removes *scratch* from buffer after the mode has been set.
-(defun remove-scratch-buffer ()
-  (if (get-buffer "*scratch*")
-      (kill-buffer "*scratch*")))
-(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
