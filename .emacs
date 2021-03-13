@@ -261,6 +261,8 @@
 (add-hook 'php-mode-hook
           '(lambda ()
              (lsp-deferred)
+             ;; guess-style bug
+             (setq c-basic-offset 4)
              ))
 
 (add-hook 'web-mode-hook
