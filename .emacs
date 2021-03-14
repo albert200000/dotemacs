@@ -26,7 +26,7 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
-(setq-default tab-width 2)
+(setq-default tab-width 4)
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; The beeping can be annoying--turn it off
 (setq visible-bell t
@@ -261,8 +261,6 @@
 (add-hook 'php-mode-hook
           '(lambda ()
              (lsp-deferred)
-             ;; guess-style bug
-             (setq c-basic-offset 4)
              ))
 
 (add-hook 'web-mode-hook
