@@ -26,20 +26,16 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
-(setq-default tab-width 4)
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; The beeping can be annoying--turn it off
-(setq visible-bell t
-      ring-bell-function #'ignore)
+(setq visible-bell t ring-bell-function #'ignore)
 ;; Auto refresh buffers when edits occur outside emacs
 (global-auto-revert-mode 1)
-;; Also auto refresh Dired, but be quiet about it
-(setq global-auto-revert-non-file-buffers t)
+(require 'autorevert)
+(setq global-auto-revert-non-file-buffers t) ;; Also auto refresh Dired, but be quiet about it
 (setq auto-revert-verbose nil)
-;; Move files to trash when deleting
-(setq delete-by-moving-to-trash t)
-;; Don’t compact font caches during GC.
-(setq inhibit-compacting-font-caches t)
+(setq delete-by-moving-to-trash t) ;; Move files to trash when deleting
+(setq inhibit-compacting-font-caches t) ;; Don’t compact font caches during GC.
 (setq mouse-wheel-scroll-amount '(2)) ;; lines at a time
 (setq mouse-wheel-progressive-speed nil)
 (setq scroll-step 1) ;; keyboard scroll lines at a time
@@ -54,21 +50,16 @@
 (setq line-number-mode t)
 (setq-default truncate-lines t)
 (setq-default indent-tabs-mode nil)
-(setq c-default-style "linux")
+(setq-default tab-width 4)
 (desktop-save-mode 1)
-;; normal shortcuts
-(cua-mode t)
+(cua-mode t) ;; normal shortcuts
 (setq-default cursor-type 'bar)
-(add-hook 'prog-mode-hook (lambda ()
-                            (display-line-numbers-mode)
-                            (hs-minor-mode)
-                            (diminish 'hs-minor-mode)
-                            ))
 (column-number-mode t)
 (scroll-bar-mode t)
 (tool-bar-mode -1)
 (auto-save-visited-mode t)
 (recentf-mode 1)
+(require 'recentf)
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 (save-place-mode nil)
@@ -77,19 +68,12 @@
 (global-so-long-mode 1)
 (setq-default bidi-paragraph-direction 'left-to-right)
 (setq bidi-inhibit-bpa t)
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
-(defun save-all ()
-  (interactive)
-  (save-some-buffers t))
-(add-hook 'focus-out-hook 'save-all)
-
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+(add-function :after after-focus-change-function (lambda () (unless (frame-focus-state) (save-some-buffers t))))
 
 (windmove-default-keybindings 'meta)
-
 (define-key isearch-mode-map (kbd "C-v") 'isearch-yank-kill)
 (global-set-key (kbd "C-/") 'comment-line)
 (global-set-key (kbd "C-x k") (lambda () (interactive) (kill-buffer (current-buffer))))
@@ -139,10 +123,16 @@
 
 ;; Custom lisp
 (load "~/.emacs.d/lisp/flymake-pug")
-
 (load "~/.emacs.d/lisp/guess-style")
-(add-hook 'prog-mode-hook 'guess-style-guess-all)
 
+(add-hook 'prog-mode-hook (lambda ()
+                            (display-line-numbers-mode)
+                            (hs-minor-mode)
+                            (diminish 'hs-minor-mode)
+                            (guess-style-guess-all)
+                            ))
+
+(require 'helm)
 (setq helm-boring-buffer-regexp-list (list (rx "*") (rx " markdown")))
 (setq helm-split-window-inside-p t)
 (setq helm-move-to-line-cycle-in-source t)
@@ -160,8 +150,7 @@
   (setq-local electric-pair-pairs (append electric-pair-pairs '((?\' . ?\'))))
   (setq-local electric-pair-text-pairs electric-pair-pairs))
 
-;; Causes problem with imenu in php mode
-(semantic-mode -1)
+(semantic-mode -1) ;; Causes problem with imenu in php mode
 
 (require 'imenu)
 (setq imenu-max-item-length 1000)
@@ -234,9 +223,6 @@
 (setq web-mode-markup-indent-offset 4)
 (setq web-mode-code-indent-offset 4)
 (setq web-mode-attr-indent-offset 4)
-(add-to-list 'auto-mode-alist '("\\.min.js\\'" . text-mode))
-(setq js-switch-indent-offset 2)
-(add-to-list 'interpreter-mode-alist '("node" . js-mode))
 
 (add-hook 'js-mode-hook (lambda ()
                           (when (string-equal "json" (file-name-extension buffer-file-name))
@@ -278,6 +264,9 @@
               (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev))
               (company-mode t))))
 
+(add-to-list 'auto-mode-alist '("\\.min.js\\'" . text-mode))
+(setq js-switch-indent-offset 2)
+(add-to-list 'interpreter-mode-alist '("node" . js-mode))
 (add-to-list 'magic-mode-alist '("^import React" . web-mode))
 (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 
@@ -287,9 +276,7 @@
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 (all-the-icons-ibuffer-mode 1)
-
 (global-hl-todo-mode t)
-
 (editorconfig-mode 1)
 
 (setq org-support-shift-select t)
