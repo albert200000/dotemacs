@@ -66,6 +66,7 @@
 (global-subword-mode 1)
 (delete-selection-mode 1)
 (global-so-long-mode 1)
+(global-hl-line-mode 1)
 (setq-default bidi-paragraph-direction 'left-to-right)
 (setq bidi-inhibit-bpa t)
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
