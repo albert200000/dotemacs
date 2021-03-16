@@ -51,6 +51,7 @@
 (setq-default truncate-lines t)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq-default c-basic-offset 4)
 (desktop-save-mode 1)
 (cua-mode t) ;; normal shortcuts
 (setq-default cursor-type 'bar)
@@ -207,7 +208,8 @@
 (add-hook 'scss-mode-hook 'lsp-deferred)
 
 (require 'dotenv-mode) ; unless installed from a package
-(add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode)) ;; for optionally supporting additional file extensions such as `.env.test' with this major mode
+;; for optionally supporting additional file extensions such as `.env.test' with this major mode
+(add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -264,6 +266,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.min.js\\'" . text-mode))
 (setq js-switch-indent-offset 2)
+;; for optionally supporting additional file extensions such as `.json.test' with this major mode
+(add-to-list 'auto-mode-alist '("\\.json\\..*\\'" . js-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js-mode))
 (add-to-list 'magic-mode-alist '("^import React" . web-mode))
 (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
