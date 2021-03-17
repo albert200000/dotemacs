@@ -216,6 +216,7 @@
 (add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 (setq web-mode-enable-auto-pairing nil)
+(setq web-mode-enable-auto-indentation nil)
 (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
 (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
 (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
