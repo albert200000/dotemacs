@@ -52,6 +52,7 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
+(setq-default standard-indent 4)
 (desktop-save-mode 1)
 (cua-mode t) ;; normal shortcuts
 (setq-default cursor-type 'bar)
@@ -221,9 +222,6 @@
 (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
 (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
 (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
-(setq web-mode-markup-indent-offset 4)
-(setq web-mode-code-indent-offset 4)
-(setq web-mode-attr-indent-offset 4)
 
 (add-hook 'js-mode-hook (lambda ()
                           (when (string-equal "json" (file-name-extension buffer-file-name))
