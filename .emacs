@@ -109,7 +109,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(editorconfig move-text block-nav geben helm lsp-mode flymake-eslint typescript-mode indium diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region yasnippet-snippets pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
+   '(editorconfig move-text block-nav geben helm lsp-mode flymake-eslint typescript-mode indium diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -170,9 +170,6 @@
 (require 'company-dabbrev)
 (setq company-dabbrev-downcase nil)
 (require 'company-web-html)
-
-(require 'yasnippet)
-(yas-global-mode 1)
 
 (require 'dumb-jump)
 (dumb-jump-mode t)
@@ -288,7 +285,6 @@
 (diminish 'anzu-mode)
 (diminish 'company-mode)
 (diminish 'subword-mode)
-(diminish 'yas-minor-mode)
 (diminish 'lsp-mode)
 (diminish 'abbrev-mode)
 (diminish 'all-the-icons-dired-mode)
