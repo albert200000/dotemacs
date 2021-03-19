@@ -109,7 +109,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(editorconfig move-text block-nav geben helm lsp-mode flymake-eslint typescript-mode indium diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
+   '(editorconfig move-text block-nav helm lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
