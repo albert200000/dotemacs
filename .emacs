@@ -109,7 +109,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(editorconfig move-text block-nav helm lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
+   '(helm-xref editorconfig move-text block-nav helm lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -142,6 +142,8 @@
 (setq helm-allow-mouse t)
 (helm-mode 1)
 
+(require 'helm-xref)
+
 (require 'paren)
 (show-paren-mode t)
 
@@ -166,7 +168,8 @@
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-require-match nil)
-(setq company-idle-delay .1)
+(setq company-idle-delay 0.0)
+(setq company-minimum-prefix-length 2)
 (require 'company-dabbrev)
 (setq company-dabbrev-downcase nil)
 (require 'company-web-html)
@@ -189,7 +192,6 @@
 (setq lsp-eldoc-render-all t)
 (setq lsp-diagnostics-provider :flymake)
 (setq lsp-modeline-diagnostics-enable nil)
-(setq lsp-diagnostics-disabled-modes '(web-mode))
 (setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-enable-file-watchers nil)
 (setq lsp-file-watch-ignored '("vendor" "node-modules"))
@@ -212,7 +214,6 @@
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 (setq web-mode-enable-auto-pairing nil)
 (setq web-mode-enable-auto-indentation nil)
 (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
@@ -221,12 +222,17 @@
 (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
 
 (add-hook 'js-mode-hook (lambda ()
-                          (when (string-equal "json" (file-name-extension buffer-file-name))
-                            (lsp-deferred))
                           (when (string-equal "js" (file-name-extension buffer-file-name))
+                            (setq lsp-diagnostics-disabled-modes '(js-mode))
                             (flymake-eslint-enable))
+                          (lsp-deferred)
                           (setQuoteElectricPair)
                           ))
+
+(add-hook 'typescript-mode-hook (lambda ()
+                                  (lsp-deferred)
+                                  (setQuoteElectricPair)
+                                  ))
 
 (require 'pug-mode)
 (setq pug-tab-width 2)
@@ -247,26 +253,15 @@
 
 (add-hook 'web-mode-hook
           (lambda ()
-            (when (string-equal "js" (file-name-extension buffer-file-name))
-              (flymake-eslint-enable))
-            (when (or
-                   (string-equal "js" (file-name-extension buffer-file-name))
-                   (string-equal "tsx" (file-name-extension buffer-file-name))
-                   )
-              (lsp-deferred)
-              (setQuoteElectricPair)
-              )
-            (when (string-equal "twig" (file-name-extension buffer-file-name))
-              (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev))
-              (company-mode t))))
+            (lsp-deferred)
+            (setQuoteElectricPair)
+            (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev))
+            (company-mode t)))
 
 (add-to-list 'auto-mode-alist '("\\.min.js\\'" . text-mode))
-(setq js-switch-indent-offset 2)
 ;; for optionally supporting additional file extensions such as `.json.test' with this major mode
 (add-to-list 'auto-mode-alist '("\\.json\\..*\\'" . js-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js-mode))
-(add-to-list 'magic-mode-alist '("^import React" . web-mode))
-(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 
 (require 'expand-region)
 
