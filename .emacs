@@ -26,6 +26,7 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
+(setq mode-require-final-newline nil)
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; The beeping can be annoying--turn it off
 (setq visible-bell t ring-bell-function #'ignore)
@@ -60,6 +61,7 @@
 (scroll-bar-mode t)
 (tool-bar-mode -1)
 (auto-save-visited-mode t)
+(setq create-lockfiles nil)
 (recentf-mode 1)
 (require 'recentf)
 (setq recentf-max-menu-items 25)
