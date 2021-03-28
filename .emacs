@@ -172,6 +172,7 @@
 (setq company-require-match nil)
 (setq company-idle-delay 0.0)
 (setq company-minimum-prefix-length 2)
+(setq company-selection-wrap-around t)
 (require 'company-dabbrev)
 (setq company-dabbrev-downcase nil)
 (require 'company-web-html)
@@ -255,7 +256,6 @@
 
 (add-hook 'web-mode-hook
           (lambda ()
-            (lsp-deferred)
             (setQuoteElectricPair)
             (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev))
             (company-mode t)))
