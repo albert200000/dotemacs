@@ -186,9 +186,7 @@
 (setq flymake-no-changes-timeout 0.2)
 (flyspell-mode 0)
 
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (flymake-mode t)))
+(add-hook 'emacs-lisp-mode-hook #'flymake-mode)
 
 (require 'lsp-mode)
 (setq lsp-enable-snippet nil)
