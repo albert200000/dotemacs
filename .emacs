@@ -111,7 +111,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(helm-xref editorconfig move-text block-nav helm lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
+   '(dracula-theme helm-xref editorconfig move-text block-nav helm lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -124,7 +124,7 @@
   (package-refresh-contents))
 (package-install-selected-packages)
 
-(load-theme 'leuven t)
+(load-theme 'dracula t)
 
 ;; Custom lisp
 (load "~/.emacs.d/lisp/flymake-pug")
