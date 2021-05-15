@@ -205,6 +205,7 @@
 (setq lsp-log-io nil)
 (setq lsp-enable-symbol-highlighting nil)
 (setq lsp-enable-folding nil)
+(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascript"))
 (setenv "TSSERVER_LOG_FILE" "/tmp/tsserver.log")
 
 (require 'yaml-mode)
@@ -230,7 +231,7 @@
 
 (add-hook 'js-mode-hook (lambda ()
                           (when (string-equal "js" (file-name-extension buffer-file-name))
-                            (setq lsp-diagnostics-disabled-modes '(js-mode))
+                            (setq lsp-diagnostics-disabled-modes '(js-mode js-jsx-mode))
                             (flymake-eslint-enable))
                           (lsp-deferred)
                           (setQuoteElectricPair)
@@ -297,6 +298,12 @@
                          (dired-directory dired-directory ; Dired buffer
                                           (revert-buffer-function "%b" ; Buffer Menu
                                                                   (default-directory))))) ; Plain buffer
+
+(dir-locals-set-class-variables 'react-directory
+                                '((nil . ((mode . js-jsx)))))
+
+(dir-locals-set-directory-class
+ "~/Projects/slot-web-new/src/components" 'react-directory)
 
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
