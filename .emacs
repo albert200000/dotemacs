@@ -70,7 +70,7 @@
 (global-subword-mode 1)
 (delete-selection-mode 1)
 (global-so-long-mode 1)
-(global-hl-line-mode 1)
+(global-hl-line-mode -1)
 (setq-default bidi-paragraph-direction 'left-to-right)
 (setq bidi-inhibit-bpa t)
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
@@ -111,7 +111,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(dracula-theme helm-xref editorconfig move-text block-nav helm lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
+   '(ido-completing-read+ editorconfig move-text block-nav lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -124,7 +124,7 @@
   (package-refresh-contents))
 (package-install-selected-packages)
 
-(load-theme 'dracula t)
+(load-theme 'deeper-blue t)
 
 ;; Custom lisp
 (load "~/.emacs.d/lisp/flymake-pug")
@@ -137,14 +137,17 @@
                             (guess-style-guess-all)
                             ))
 
-(require 'helm)
-(setq helm-boring-buffer-regexp-list (list (rx "*") (rx " markdown")))
-(setq helm-split-window-inside-p t)
-(setq helm-move-to-line-cycle-in-source t)
-(setq helm-allow-mouse t)
-(helm-mode 1)
+(require 'ido)
+(setq ido-everywhere t)
+(setq ido-enable-prefix nil)
+(setq ido-enable-flex-matching t)
+(setq ido-use-filename-at-point nil)
+(setq ido-create-new-buffer 'always)
+(setq ido-ignore-buffers '("\\` " "^\*"))
+(ido-mode t)
 
-(require 'helm-xref)
+(require 'ido-completing-read+)
+(ido-ubiquitous-mode 1)
 
 (require 'paren)
 (show-paren-mode t)
@@ -284,7 +287,6 @@
 (diminish 'abbrev-mode)
 (diminish 'all-the-icons-dired-mode)
 (diminish 'all-the-icons-ibuffer-mode)
-(diminish 'helm-mode)
 (diminish 'editorconfig-mode)
 
 (setq frame-title-format
@@ -305,12 +307,9 @@
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-c s") 'helm-imenu)
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-S-s") 'helm-grep-do-git-grep)
-(global-set-key (kbd "C-c o") 'helm-occur)
+(global-set-key (kbd "C-x b") 'switch-to-buffer)
+(global-set-key (kbd "C-c s") 'imenu)
+;; (global-set-key (kbd "C-S-s") 'helm-grep-do-git-grep)
 (global-set-key (kbd "C-c f") 'project-find-file)
 (global-set-key (kbd "S-<return>") 'avy-goto-word-1)
 (global-set-key (kbd "C-x .") 'dumb-jump-go)
