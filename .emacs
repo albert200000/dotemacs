@@ -111,7 +111,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(flimenu deadgrep ido-completing-read+ editorconfig move-text block-nav lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
+   '(sr-speedbar flimenu deadgrep ido-completing-read+ editorconfig move-text block-nav lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -279,6 +279,15 @@
 (global-hl-todo-mode t)
 (editorconfig-mode 1)
 
+(require 'sr-speedbar)
+(setq sr-speedbar-right-side nil)
+(setq speedbar-show-unknown-files t)
+
+(add-hook 'emacs-startup-hook (lambda ()
+                                (sr-speedbar-open)
+                                (windmove-right)
+                                ))
+
 (setq org-support-shift-select t)
 
 (require 'diminish)
@@ -326,7 +335,7 @@
 (global-set-key (kbd "C-x ,") 'dumb-jump-back)
 (global-set-key (kbd "C-z")   'undo-fu-only-undo)
 (global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
-(global-set-key (kbd "C-\\") 'speedbar)
+(global-set-key (kbd "C-\\") 'sr-speedbar-toggle)
 (global-set-key (kbd "M-[") 'sp-unwrap-sexp)
 (global-set-key (kbd "C-<down>") 'block-nav-next-block)
 (global-set-key (kbd "C-<up>") 'block-nav-previous-block)
