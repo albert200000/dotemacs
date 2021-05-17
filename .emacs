@@ -127,7 +127,7 @@
 ;; Custom lisp
 (load "~/.emacs.d/lisp/flymake-pug")
 (load "~/.emacs.d/lisp/guess-style")
-
+ 
 (add-hook 'prog-mode-hook (lambda ()
                             (display-line-numbers-mode)
                             (hs-minor-mode)
@@ -227,10 +227,15 @@
 (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
 (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
 
+(defun enableEslint ()
+  (condition-case err
+      (flymake-eslint-enable)
+    (error (message "%s" (error-message-string err)))))
+
 (add-hook 'js-mode-hook (lambda ()
                           (when (string-equal "js" (file-name-extension buffer-file-name))
                             (setq lsp-diagnostics-disabled-modes '(js-mode js-jsx-mode))
-                            (flymake-eslint-enable))
+                            (enableEslint))
                           (lsp-deferred)
                           (setQuoteElectricPair)
                           ))
@@ -239,9 +244,6 @@
                                   (lsp-deferred)
                                   (setQuoteElectricPair)
                                   ))
-
-(require 'pug-mode)
-(setq pug-tab-width 2)
 
 (add-hook 'pug-mode-hook (lambda ()
                            (flymake-pug-turn-on)
@@ -317,7 +319,6 @@
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-x b") 'switch-to-buffer)
 (global-set-key (kbd "C-c s") 'imenu)
 (global-set-key (kbd "C-S-s") 'deadgrep)
 (global-set-key (kbd "C-c f") 'project-find-file)
