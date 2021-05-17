@@ -55,7 +55,7 @@
 (setq-default c-basic-offset 4)
 (setq-default standard-indent 4)
 (desktop-save-mode 1)
-(cua-mode t) ;; normal shortcuts
+(cua-mode t)
 (setq-default cursor-type 'bar)
 (column-number-mode t)
 (scroll-bar-mode t)
@@ -65,7 +65,7 @@
 (recentf-mode 1)
 (require 'recentf)
 (setq recentf-max-menu-items 25)
-(setq recentf-max-saved-items 25)
+(setq recentf-max-saved-items 50)
 (save-place-mode nil)
 (global-subword-mode 1)
 (delete-selection-mode 1)
@@ -88,11 +88,9 @@
 (global-set-key (kbd "C-<tab>") 'indent-rigidly)
 (global-set-key (kbd "S-<backspace>") 'delete-horizontal-space)
 (global-set-key (kbd "<escape>") 'keyboard-quit)
-;; zoom in/out like we do everywhere else.
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C-_") 'text-scale-decrease)
 
-;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq mac-command-modifier 'control))
 
@@ -111,7 +109,7 @@
  '(custom-safe-themes
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(package-selected-packages
-   '(sr-speedbar flimenu deadgrep ido-completing-read+ editorconfig move-text block-nav lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
+   '(flimenu deadgrep ido-completing-read+ editorconfig move-text block-nav lsp-mode flymake-eslint typescript-mode diminish coffee-mode verb hl-todo all-the-icons-dired all-the-icons-ibuffer dumb-jump dotenv-mode company-web expand-region pug-mode format-all undo-fu yaml-mode avy company web-mode anzu php-mode rainbow-mode)))
 
 (set-frame-font "Hack:pixelsize=16")
 
@@ -279,14 +277,7 @@
 (global-hl-todo-mode t)
 (editorconfig-mode 1)
 
-(require 'sr-speedbar)
-(setq sr-speedbar-right-side nil)
 (setq speedbar-show-unknown-files t)
-
-(add-hook 'emacs-startup-hook (lambda ()
-                                (sr-speedbar-open)
-                                (windmove-right)
-                                ))
 
 (setq org-support-shift-select t)
 
@@ -335,7 +326,7 @@
 (global-set-key (kbd "C-x ,") 'dumb-jump-back)
 (global-set-key (kbd "C-z")   'undo-fu-only-undo)
 (global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
-(global-set-key (kbd "C-\\") 'sr-speedbar-toggle)
+(global-set-key (kbd "C-\\") 'speedbar)
 (global-set-key (kbd "M-[") 'sp-unwrap-sexp)
 (global-set-key (kbd "C-<down>") 'block-nav-next-block)
 (global-set-key (kbd "C-<up>") 'block-nav-previous-block)
