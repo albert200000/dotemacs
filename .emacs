@@ -204,6 +204,8 @@
 (setq lsp-log-io nil)
 (setq lsp-enable-symbol-highlighting nil)
 (setq lsp-enable-folding nil)
+(setq lsp-intelephense-files-exclude ["**/.git/**" "**/.svn/**" "**/.hg/**" "**/CVS/**" "**/.DS_Store/**"
+   "**/node_modules/**" "**/bower_components/**"])
 (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascript"))
 (setenv "TSSERVER_LOG_FILE" "/tmp/tsserver.log")
 
