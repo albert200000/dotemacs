@@ -331,6 +331,7 @@
 (global-set-key (kbd "C-S-<up>") 'block-nav-previous-indentation-level)
 (global-set-key (kbd "M-S-<down>") 'move-text-down)
 (global-set-key (kbd "M-S-<up>") 'move-text-up)
+(global-set-key (kbd "C-c SPC") 'company-complete)
 
 ;; Unboldify fonts
 (set-face-attribute 'font-lock-type-face nil :weight 'normal)
